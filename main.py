@@ -10,6 +10,7 @@ def main() -> None:
     engine.add_player(Player("player2"))
 
     engine.prepare_game()
+    engine.run()
 
 
 if __name__ == "__main__":

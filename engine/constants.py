@@ -7,3 +7,10 @@ class CardColor(Enum):
     GREEN = "green"
     RED = "red"
     WILD = "wild"
+
+
+class GameStatus(Enum):
+    PREPARING = "Preparing"
+    RTP = "Ready To Play"
+    PLAYING = "Playing"
+    FINISHED = "Finished"

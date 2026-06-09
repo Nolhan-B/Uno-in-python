@@ -4,3 +4,7 @@ class NotEnoughPlayersError(Exception):
 
 class TooManyPlayersError(Exception):
     pass
+
+
+class GameNotReadyError(Exception):
+    pass
