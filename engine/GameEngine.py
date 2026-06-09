@@ -18,9 +18,8 @@ class GameEngine:
 
     def add_player(self, player: Player) -> None:
         self.players.append(player)
-        print(f"Added player '{player.name}'")
 
-    def start_game(self) -> None:
+    def prepare_game(self) -> None:
         if len(self.players) < 2:
             raise NotEnoughPlayersError("Need at least 2 players")
         if len(self.players) > 4:
@@ -32,3 +31,8 @@ class GameEngine:
                 player.hand.add_card(self.deck.draw())
 
         print(f"\nStarted game with {len(self.players)} players\n\n\n\n\n")
+
+        self.discard_pile.append(self.deck.draw())
+
+    def run(self) -> None:
+        pass

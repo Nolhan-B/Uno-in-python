@@ -9,7 +9,7 @@ def main() -> None:
     engine.add_player(Player("player1"))
     engine.add_player(Player("player2"))
 
-    engine.start_game()
+    engine.prepare_game()
 
 
 if __name__ == "__main__":

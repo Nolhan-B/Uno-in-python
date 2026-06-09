@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+import uuid
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -11,6 +13,7 @@ from abc import ABC, abstractmethod
 class Card(ABC):
     def __init__(self, color: CardColor) -> None:
         self.color = color
+        self.id = str(uuid.uuid4())
 
     @abstractmethod
     def __str__(self) -> str:
