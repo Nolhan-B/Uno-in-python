@@ -1,4 +1,5 @@
 from engine.Cards.Card import Card
+from engine.GameEngine import GameEngine
 from engine.constants import CardColor
 
 
@@ -7,7 +8,7 @@ class WildDrawFourCard(Card):
         super().__init__(CardColor.WILD)
 
     def __str__(self) -> str:
-        return f"Draw Four Wild Card"
+        return "Draw Four Wild Card"
 
     def apply_effects(self, game_engine: "GameEngine") -> None:
         print("test")

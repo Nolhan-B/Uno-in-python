@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
+from engine.GameEngine import GameEngine
 from engine.constants import CardColor
+
 
 class Card(ABC):
     def __init__(self, color: CardColor) -> None:

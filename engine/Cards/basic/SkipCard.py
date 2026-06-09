@@ -1,4 +1,5 @@
 from engine.Cards.Card import Card
+from engine.GameEngine import GameEngine
 from engine.constants import CardColor
 
 
