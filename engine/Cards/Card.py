@@ -1,7 +1,11 @@
-from abc import ABC, abstractmethod
+from __future__ import annotations
+from typing import TYPE_CHECKING
 
-from engine.GameEngine import GameEngine
+if TYPE_CHECKING:
+    from engine.GameEngine import GameEngine
+
 from engine.constants import CardColor
+from abc import ABC, abstractmethod
 
 
 class Card(ABC):

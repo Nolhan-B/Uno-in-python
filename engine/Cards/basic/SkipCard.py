@@ -1,5 +1,9 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from engine.GameEngine import GameEngine
 from engine.Cards.Card import Card
-from engine.GameEngine import GameEngine
 from engine.constants import CardColor
 
 
