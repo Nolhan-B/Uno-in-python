@@ -19,7 +19,7 @@ class Deck:
                  qty_draw_two=2,
                  qty_wild=4,
                  qty_wild_draw_four=4
-                ) -> None:
+                 ) -> None:
         self.qty_numbers = qty_numbers
         self.qty_skip = qty_skip
         self.qty_reverse = qty_reverse
@@ -30,7 +30,10 @@ class Deck:
 
     def _generate_cards(self) -> List[Card]:
         cards = []
-        for color in [CardColor.RED, CardColor.GREEN, CardColor.BLUE, CardColor.YELLOW]:
+        for color in [CardColor.RED,
+                      CardColor.GREEN,
+                      CardColor.BLUE,
+                      CardColor.YELLOW]:
             cards.append(NumberCard(color, 0))
             for number in range(1, 10):
                 for _ in range(self.qty_numbers):
