@@ -25,3 +25,10 @@ class GameEngine:
             raise NotEnoughPlayersError("Need at least 2 players")
         if len(self.players) > 4:
             raise TooManyPlayersError("Max 4 players")
+
+        self.deck.shuffle()
+        for _ in range(self.game_config.cards_per_player):
+            for player in self.players:
+                player.hand.add_card(self.deck.draw())
+
+        print(f"\nStarted game with {len(self.players)} players\n\n\n\n\n")
