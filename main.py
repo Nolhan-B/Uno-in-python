@@ -16,5 +16,7 @@ def main() -> None:
 if __name__ == "__main__":
     try:
         main()
+    except KeyboardInterrupt:
+        print("\n\n=============\nClosing game\n=============\n")
     except Exception as e:
         print("unhandled exception :", e)

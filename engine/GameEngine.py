@@ -1,14 +1,16 @@
 import random
 from time import sleep
 
+from engine.Cards.basic.NumberCard import NumberCard
 from engine.GameConfig import GameConfig
 from engine.Player import Player
 from engine.constants import GameStatus
 from engine.deck import Deck
 from engine.exceptions import (
     NotEnoughPlayersError,
-    TooManyPlayersError, GameNotReadyError
+    TooManyPlayersError, GameNotReadyError, InvalidCardIndexError, CardNotPlayableError
 )
+from engine.rules import Rules
 
 
 class GameEngine:
@@ -42,9 +44,33 @@ class GameEngine:
         print(f"Player '{self.players[self.current_player_index].name}' will begin\n")
         print("=" * 40)
 
-        self.discard_pile.append(self.deck.draw())
+        while not isinstance(self.deck.preview_next_card(), NumberCard):
+            self.deck.shuffle()
 
+        self.discard_pile.append(self.deck.draw())
         self.status = GameStatus.RTP
+
+    def _get_card_nb_from_user(self) -> int:
+        player_asked = self.get_current_player()
+        while True:
+            try:
+                value = int(input("Card number to play: "))
+                if value > len(player_asked.hand.cards) or value < 0:
+                    raise InvalidCardIndexError("Invalid card number")
+                if not Rules.is_card_playable(
+                        player_asked.hand.cards[value],
+                        self.discard_pile[-1]
+                ):
+                    raise CardNotPlayableError("You cannot play this card.")
+                break
+            except (ValueError, IndexError, EOFError):
+                print("Invalid card number")
+            except (InvalidCardIndexError, CardNotPlayableError) as e:
+                print(e)
+        return int(value)
+
+    # def _play_card_for_user(self, index: int) -> None:
+
 
     def run(self) -> None:
         if self.status != GameStatus.RTP:
@@ -53,5 +79,15 @@ class GameEngine:
         self.status = GameStatus.PLAYING
 
         while self.status == GameStatus.PLAYING:
-            sleep(2)
+            for player in self.players:
+                print(player.name, "hand:", end=" ")
+                for i, card in enumerate(player.hand.cards):
+                    print(f"[{i}]", "playable" if Rules.is_card_playable(card, self.discard_pile[-1]) else "not playable", card, end=" | ")
+                print("\n")
+                print("=" * 20, "\n")
+            print(f"Last card is: {self.discard_pile[-1]}")
+            card_to_play = self._get_card_nb_from_user()
             break
+
+    def get_current_player(self) -> Player:
+        return self.players[self.current_player_index]

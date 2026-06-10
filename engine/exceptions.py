@@ -8,3 +8,9 @@ class TooManyPlayersError(Exception):
 
 class GameNotReadyError(Exception):
     pass
+
+class InvalidCardIndexError(Exception):
+    pass
+
+class CardNotPlayableError(Exception):
+    pass

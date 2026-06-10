@@ -53,5 +53,8 @@ class Deck:
     def shuffle(self) -> None:
         random.shuffle(self.cards)
 
+    def preview_next_card(self) -> Card | None:
+        return self.cards[-1] if self.cards else None
+
     def draw(self) -> Card:
         return self.cards.pop()
